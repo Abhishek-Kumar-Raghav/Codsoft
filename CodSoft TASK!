@@ -1,79 +1,45 @@
-"""Create a Python program that acts as a basic calculator. It should prompt the user to
-enter two numbers and choose an operation (addition, subtraction, multiplication,
-division). Then, it should perform the selected operation and display the result to the
-user."""
+# Function to add two numbers
+def add(x, y):
+    return x + y
 
+# Function to subtract two numbers
+def subtract(x, y):
+    return x - y
 
-from tkinter import *
+# Function to multiply two numbers
+def multiply(x, y):
+    return x * y
 
-window = Tk()
-window.title("Arithmetic Calculator")
-window.geometry('800x300')
-
-def calculate():
-    try:
-        num1 = float(entry1.get())
-        num2 = float(entry2.get())
-    except ValueError:
-        result_label.config(text="Please enter valid numbers.")
-        return
-    
-    operation = operation_var.get()
-    
-    if operation == "+":
-        result = num1 + num2
-    elif operation == "-":
-        result = num1 - num2
-    elif operation == "*":
-        result = num1 * num2
-    elif operation == "/":
-        if num2 == 0:
-            result_label.config(text="Cannot divide by zero.")
-            return
-        result = num1 / num2
+# Function to divide two numbers
+def divide(x, y):
+    if y == 0:
+        return "Error! Division by zero is not allowed."
     else:
-        result_label.config(text="Please select an operation.")
-        return
-    
-    result_label.config(text=f"Result: {result}")
+        return x / y
 
-label1 = Label(window, text="Number 1:")
-label1.grid(row=0, column=0, padx=10, pady=5)
+# Main function to take input from the user and perform calculations
+def calculator():
+    print("Select operation:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
 
-entry1 = Entry(window)
-entry1.grid(row=0, column=1, padx=10, pady=5)
+    choice = input("Enter choice (1/2/3/4): ")
 
-label2 = Label(window, text="Number 2:")
-label2.grid(row=1, column=0, padx=10, pady=5)
+    num1 = float(input("Enter first number: "))
+    num2 = float(input("Enter second number: "))
 
-entry2 = Entry(window)
-entry2.grid(row=1, column=1, padx=10, pady=5)
+    if choice == '1':
+        print(num1, "+", num2, "=", add(num1, num2))
+    elif choice == '2':
+        print(num1, "-", num2, "=", subtract(num1, num2))
+    elif choice == '3':
+        print(num1, "*", num2, "=", multiply(num1, num2))
+    elif choice == '4':
+        print(num1, "/", num2, "=", divide(num1, num2))
+    else:
+        print("Invalid input")
 
-operation_var = StringVar()
-operation_var.set("+")
-
-label3 = Label(window, text="Operation:")
-label3.grid(row=2, column=0, padx=10, pady=5)
-
-operations_frame = Frame(window)
-operations_frame.grid(row=2, column=1, padx=10, pady=5)
-
-radio_add = Radiobutton(operations_frame, text="+", variable=operation_var, value="+")
-radio_add.pack(side=LEFT)
-
-radio_subtract = Radiobutton(operations_frame, text="-", variable=operation_var, value="-")
-radio_subtract.pack(side=LEFT)
-
-radio_multiply = Radiobutton(operations_frame, text="", variable=operation_var, value="*")
-radio_multiply.pack(side=LEFT)
-
-radio_divide = Radiobutton(operations_frame, text="/", variable=operation_var, value="/")
-radio_divide.pack(side=LEFT)
-
-submit_button = Button(window, text="Calculate", command=calculate)
-submit_button.grid(row=3, column=0, columnspan=2, pady=10)
-
-result_label = Label(window, text="Result: ")
-result_label.grid(row=4, column=0, columnspan=2, pady=5)
-
-window.mainloop()
+# Calling the calculator function to start the program
+calculator()
